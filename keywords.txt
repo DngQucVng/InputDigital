@@ -1,0 +1,19 @@
+# Datatypes
+InputDigital	        KEYWORD1
+
+# Methods and functions
+is_low								KEYWORD2
+is_high	              KEYWORD2
+has_changed	        	KEYWORD2
+has_fallen	  				KEYWORD2
+has_risen	  					KEYWORD2
+set_debounce_duration	KEYWORD2
+get_change_counter		KEYWORD2
+get_falling_counter		KEYWORD2
+get_rising_counter		KEYWORD2
+reset_change_counter	KEYWORD2
+reset_falling_counter	KEYWORD2
+reset_rising_counter	KEYWORD2
+reset_all_counters		KEYWORD2
+
+# Constants
