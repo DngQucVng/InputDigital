@@ -7,15 +7,15 @@ InputDigital button(BUTTON_PIN);
 void setup() {
 	Serial.begin(115200);
 
-	// This method must always be called in setup()
+	// This must always be called in setup()
 	button.begin();
 
-	// This method is OPTIONAL, if you don't call it then the default debounce duration will be 100 milli-seconds
-	button.set_debounce_duration(200); // Unit = milli-seconds
+	// This is OPTIONAL, if you don't call it then the default debounce duration will be 50 milli-seconds
+	button.set_debounce_duration(100); // Unit = milli-seconds
 }
 
 void loop() {
-	// This method must always be called in loop()
+	// This must always be called in loop()
 	button.check();
 
 	if (button.is_high()) { // HIGH logic signal = 3.3V or 5V

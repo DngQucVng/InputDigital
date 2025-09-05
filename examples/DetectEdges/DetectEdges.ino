@@ -2,32 +2,34 @@
 
 #define BUTTON_PIN 23
 
-// Declare button with pin
 InputDigital button(BUTTON_PIN);
 
 void setup() {
 	Serial.begin(115200);
 
-	// This method must always be called in setup()
+	// This must always be called in setup()
 	button.begin();
 
-	// This method is OPTIONAL, if you don't call it then the default debounce duration will be 100 milli-seconds
-	button.set_debounce_duration(200); // Unit = milli-seconds
+	// This is OPTIONAL, if you don't call it then the default debounce duration will be 50 milli-seconds
+	button.set_debounce_duration(100); // Unit = milli-seconds
 }
 
 void loop() {
-	// This method must always be called in loop()
+	// This must always be called in loop()
 	button.check();
 
-	// This method returns true when the pin changes state (RISING and FALLING edge)
-	if (button.has_changed())
-		Serial.println("Button has changed.");
+	// This returns true when the pin changes state (RISING and FALLING edge)
+	if (button.has_changed()) {
+		// do something
+	}
 
-	// This method returns true when the pin changes state from high to low (FALLING edge)
-	if (button.has_fallen())
-		Serial.println("Falling edge detected.");
+	// This returns true when the pin changes state from HIGH to LOW (FALLING edge)
+	if (button.has_fallen()) {
+		// do something
+	}
 
-	// This method returns true when the pin changes state from low to high (RISING edge)
-	if (button.has_risen())
-		Serial.println("Rising edge detected.");
+	// This returns true when the pin changes state from LOW to HIGH (RISING edge)
+	if (button.has_risen()) {
+		// do some thing
+	}
 }

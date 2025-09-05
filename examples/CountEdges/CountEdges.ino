@@ -2,7 +2,6 @@
 
 #define BUTTON_PIN 23
 
-// Declare button with pin
 InputDigital button(BUTTON_PIN);
 
 unsigned long now, prePrint;
@@ -10,22 +9,22 @@ unsigned long now, prePrint;
 void setup() {
 	Serial.begin(115200);
 
-	// This method must always be called in setup()
+	// This must always be called in setup()
 	button.begin();
 
-	// This method is OPTIONAL, if you don't call it then the default debounce duration will be 100 milli-seconds
-	button.set_debounce_duration(200); // Unit = milli-seconds
+	// This is OPTIONAL, if you don't call it then the default debounce duration will be 50 milli-seconds
+	button.set_debounce_duration(100); // Unit = milli-seconds
 }
 
 void loop() {
-	// This method must always be called in loop()
+	// This must always be called in loop()
 	button.check();
 
 	// Get current time in milli-seconds
 	now = millis();
 
-	// Print the counters 2 times per second
-	if (now - prePrint >= 500) {
+	// Print the counters 5 times per second
+	if (now - prePrint >= 200) {
 		prePrint = now;
 		Serial.print("FALLING edge counter: "); Serial.println(button.get_falling_counter());
 		Serial.print("RISING edge counter: ");  Serial.println(button.get_rising_counter());

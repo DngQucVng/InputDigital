@@ -22,6 +22,13 @@ void InputDigital::check() {
 
 		counterChange++;
 		justChanged = true;
+
+		justActivated = mode != rawSignal;
+		if (justActivated) counterActivation++;
+
+		justDeactivated = mode == rawSignal;
+		if (justDeactivated) counterDeactivation++;
+
 		realSignal = rawSignal;
 	}
 }
@@ -50,6 +57,26 @@ bool InputDigital::has_fallen() {
 bool InputDigital::has_risen() {
 	if (justChangedToHigh) {
 		justChangedToHigh = false;
+		return true;
+	}
+
+	return false;
+}
+
+// Return true if the input has changed from default pulled state to the other after debouncing (RISING or FALLING edge)
+bool InputDigital::has_activated() {
+	if (justActivated) {
+		justActivated = false;
+		return true;
+	}
+
+	return false;
+}
+
+// Return true if the input has changed from non-default pulled state to the default after debouncing (RISING or FALLING edge)
+bool InputDigital::has_deactivated() {
+	if (justDeactivated) {
+		justDeactivated = false;
 		return true;
 	}
 
