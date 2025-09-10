@@ -1,10 +1,17 @@
 #include "InputDigital.h"
 
 // Interrupt Service Routine for when the Pin change state
+#ifdef ESP32 || ESP8266 || ARDUINO_ARCH_ESP32 || ARDUINO_ARCH_ESP8266
 void ARDUINO_ISR_ATTR InputDigital::isr() {
 	rawSignal = digitalRead(PIN);
 	lastTimeRawSignalChanged = millis();
 }
+#else
+void InputDigital::isr() {
+	rawSignal = digitalRead(PIN);
+	lastTimeRawSignalChanged = millis();
+}
+#endif
 
 // Check for debouncing to determine the real state of the input, this function must be called in loop()
 void InputDigital::check() {

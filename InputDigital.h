@@ -1,6 +1,11 @@
 #include <Arduino.h>
-#include <FunctionalInterrupt.h>
 #include <stdint.h>
+
+#ifdef ARDUINO_ARCH_STM32
+	#include <WInterrupts.h>
+#elifdef ESP32 || ESP8266 || ARDUINO_ARCH_ESP32 || ARDUINO_ARCH_ESP8266
+	#include <FunctionalInterrupt.h>
+#endif
 
 #define INPUT_DIGITAL_MODE_PULL_DOWN 0
 #define INPUT_DIGITAL_MODE_PULL_UP   1
@@ -94,5 +99,9 @@ class InputDigital {
 		uint32_t counterChange = 0, counterFalling = 0, counterRising = 0, counterActivation = 0, counterDeactivation = 0, debounceDuration = 50;
 		bool mode = false, realSignal, justChanged = false, justChangedToLow = false, justChangedToHigh = false, justActivated = false, justDeactivated = false;
 
-		void ARDUINO_ISR_ATTR isr();
+		#ifdef ESP32 || ESP8266 || ARDUINO_ARCH_ESP32 || ARDUINO_ARCH_ESP8266
+			void ARDUINO_ISR_ATTR isr();
+		#else
+			void isr();
+		#endif
 };
